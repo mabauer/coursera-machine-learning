@@ -13,8 +13,12 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+m = length(y);
 
+% jth row in X is (1, x1(j)), so X has 2 columns and m rows
 
+%J = 1/(2*m) * sum(power((theta'*X')'-y, 2));
+J = 1/(2*m) * sum(power(X*theta-y, 2));
 
 
 % =========================================================================
