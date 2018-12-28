@@ -14,3 +14,6 @@ Exercises:
 ----------
 
 1. Linear Regression: Predict profit for a food truck.
+2. Logistic Regression: 
+    1. Admission of students
+    2. QA for micro chips
