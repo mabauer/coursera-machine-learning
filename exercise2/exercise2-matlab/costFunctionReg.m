@@ -17,9 +17,19 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+    % We can use matrix-vector multiplication to computer our sums
+    sum1 = -log(h(theta, X))'*y - log(1-h(theta, X))'*(1-y) ;
+    
+    % Special case: don't regularize theta(1), therefore only use theta(2:end)
+    reg1 = theta(2:end)'*theta(2:end);
+    J = 1/m * sum1 + 0.5 * lambda/m * reg1;
 
-
-
+    % Again, the sums for the gradient is computed using a matrix-vector mutliplication
+    sum2 = X' * (h(theta, X) - y);
+    reg2 = (lambda/m) * theta;
+    % Special case: don't regularize theta(1)
+    reg2(1) = 0.0;
+    grad = 1/m * sum2 + reg2;
 
 
 % =============================================================
