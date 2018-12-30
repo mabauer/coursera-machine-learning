@@ -1,2 +1,7 @@
+# Exclude unwanted files form Jupyter notebooks and Octave
 octave-workspace
 .ipynb_checkpoints
+
+# Exclude files from coursera exercises that should not go into the github repo
+slides/*
+token.mat
