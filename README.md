@@ -17,3 +17,7 @@ Exercises:
 2. Logistic Regression: 
     1. Admission of students
     2. QA for micro chips
+3. Multi class classification: Recognition of handwritten digits
+    1. One-vs-all logistic regression
+    2. Applying a pre-learned neural network
+
