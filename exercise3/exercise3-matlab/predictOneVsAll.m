@@ -31,7 +31,13 @@ X = [ones(m, 1) X];
 %       
 
 
-
+    % Compute the results (all_theta needs to be transposed 
+    % because each row contains the theta values for one label)
+    % Each row in results contains the K values (for each of the K labels) for one element in the dataset. 
+    results = h(all_theta', X);
+    
+    % For each element (i.e. each row), we pick the label with the highest value
+    [M, p] = max(results, [], 2);
 
 
 

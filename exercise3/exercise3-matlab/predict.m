@@ -22,11 +22,23 @@ p = zeros(size(X, 1), 1);
 %
 
 
+    % Add ones to the X data matrix
+    X = [ones(m, 1) X];
 
+    % Theta1, Theta2 need to be transposed, since h(theta, X) expects theta to be a column vector
+    % In Theta1, Theta2 however, the parameters for each node are represented as a row
 
-
-
-
+    % Hidden layer
+    alpha2 = h(Theta1', X);
+    
+    % Add additional bias node alpha2(0)
+    alpha2 = [ones(m, 1) alpha2];
+    
+    % Output layer
+    alpha3 = h(Theta2', alpha2);
+    
+    % Pick the best output und use it as label
+    [M, p] = max(alpha3, [], 2);
 
 
 % =========================================================================
