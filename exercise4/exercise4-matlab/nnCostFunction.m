@@ -30,54 +30,78 @@ J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: You should complete the code by working through the
-%               following parts.
-%
-% Part 1: Feedforward the neural network and return the cost in the
-%         variable J. After implementing Part 1, you can verify that your
-%         cost function computation is correct by verifying the cost
-%         computed in ex4.m
-%
-% Part 2: Implement the backpropagation algorithm to compute the gradients
-%         Theta1_grad and Theta2_grad. You should return the partial derivatives of
-%         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
-%         Theta2_grad, respectively. After implementing Part 2, you can check
-%         that your implementation is correct by running checkNNGradients
-%
-%         Note: The vector y passed into the function is a vector of labels
-%               containing values from 1..K. You need to map this vector into a 
-%               binary vector of 1's and 0's to be used with the neural network
-%               cost function.
-%
-%         Hint: We recommend implementing backpropagation using a for-loop
-%               over the training examples if you are implementing it for the 
-%               first time.
-%
-% Part 3: Implement regularization with the cost function and gradients.
-%
-%         Hint: You can implement this around the code for
-%               backpropagation. That is, you can compute the gradients for
-%               the regularization separately and then add them to Theta1_grad
-%               and Theta2_grad from Part 2.
-%
+    % Part 1: Feedforward the neural network and return the cost in the
+    %         variable J. 
+    
+    % Add additional bias node to X
+    X = [ones(m, 1) X];
+
+    % Theta1, Theta2 need to be transposed, since h(theta, X) expects theta to be a column vector
+    % In Theta1, Theta2 however, the parameters for each node are represented as a row
+
+    % Hidden layer
+    alpha2 = h(Theta1', X);
+    
+    % Add additional bias node alpha2(0)
+    alpha2 = [ones(m, 1) alpha2];
+    
+    % Output layer
+    alpha3 = h(Theta2', alpha2);
+    
+    % Cost function without regularization term
+    y_Vec = zeros(m, num_labels);
+    for i =1:m
+        y_Vec(i, y(i)) = 1;
+    end
+
+    % We can use matrix multiplication to compute our inner sum
+    inner = -log(alpha3)*y_Vec' - log(1-alpha3)*(1-y_Vec') ;
+    sum1 = sum(diag(inner));
+    
+    J = 1/m * sum1; 
 
 
+    % Part 2: Implement the backpropagation algorithm to compute the gradients
+    %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
+    %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
+    %         Theta2_grad, respectively. 
 
+    % Output layer
+    delta3 = alpha3 - y_Vec;
+    
+    % Hidden layer
+    delta2 = delta3 * Theta2 .* alpha2 .* (1-alpha2);
+    delta2 = delta2(:, 2:end);
+    
+    Delta1 = delta2' * X;
+    Delta2 = delta3' * alpha2;
+    
+    Theta1_grad = 1/m * Delta1;
+    Theta2_grad = 1/m * Delta2;
 
+    %
+    % Part 3: Implement regularization with the cost function and gradients.
+    %    
+    
+    % Regularization term for the cost function
+    Theta1_squared = Theta1 .^ 2;
+    Theta2_squared = Theta2 .^ 2;
+    
+    Theta1_squared = Theta1_squared(:, 2:end);
+    Theta2_squared = Theta2_squared(:, 2:end);
+    
+    reg_sum = sum(Theta1_squared(:)) + sum(Theta2_squared(:));
+    J = J + lambda /(2*m) * reg_sum;
 
+    % Regularization terms for the gradient matrices
+    R1 = Theta1;
+    R1(:, 1) = 0;
+    R2 = Theta2;
+    R2(:, 1) = 0;
 
-
-
-
-
-
-
-
-
-
-
-
+    Theta1_grad = Theta1_grad + lambda/m * R1;
+    Theta2_grad = Theta2_grad + lambda/m * R2;
+    
 
 
 % -------------------------------------------------------------
