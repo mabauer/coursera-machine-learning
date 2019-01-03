@@ -13,11 +13,13 @@ For details on how to run Jupyter Notebooks with Octave, see: https://github.com
 Exercises:
 ----------
 
-1. Linear Regression: Predict profit for a food truck.
-2. Logistic Regression: 
+1. Linear Regression: Predict profit for a food truck. [Octave](exercise1/exercise1-octave.ipynb), 
+    [Python](exercise1/exercise1-python.ipynb)
+2. Logistic Regression: [Octave](exercise2/exercise2-octave.ipynb) 
     1. Admission of students
     2. QA for micro chips
-3. Multi class classification: Recognition of handwritten digits
+3. Multi class classification: Recognition of handwritten digits. [Octave](exercise3/exercise3-octave.ipynb)
     1. One-vs-all logistic regression
     2. Applying a pre-learned neural network
+4. Training a neural network: Recognition of handwritten digits. [Octave](exercise4/exercise4-octave.ipynb)
 
