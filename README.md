@@ -22,4 +22,10 @@ Exercises:
     1. One-vs-all logistic regression
     2. Applying a pre-learned neural network
 4. Training a neural network: Recognition of handwritten digits. [Octave](exercise4/exercise4-octave.ipynb)
+5. Bias and Variance Problems. [Octave](exercise5/exercise5-octave.ipynb)  
+    1. Linear regression
+    2. Polynomial features
+    3. Regularization
+    4. Learning curves
+    5. Using cross validation data and test data
 
